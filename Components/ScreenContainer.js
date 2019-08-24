@@ -4,12 +4,13 @@ import Home from './Home';
 import Scanner from './Scanner';
 
 const AppStackNavigator = createStackNavigator({
-    HomeScreen: {
+   HomeScreen: {
       screen: Home
-    },
-    ScannerScreen: {
-        screen: Scanner
-    }
+  },
+  ScannerScreen: {
+    screen: Scanner
+  },
+    
     
   });
   

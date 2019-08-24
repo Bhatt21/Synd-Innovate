@@ -30,13 +30,14 @@ const styles= StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        height: '100%'
+        height: '100%',
+        backgroundColor: '#fffae0'
     },
     text:{
         fontSize: 30
     },
     buttonContainer:{
-        height : '70%',
+        height : '90%',
         justifyContent: 'center'
     },
     

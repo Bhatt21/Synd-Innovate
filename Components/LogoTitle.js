@@ -16,8 +16,6 @@ const styles= StyleSheet.create({
     resizeMode: 'contain',
     width: '100%',
     height: '100%',
-    // marginLeft: 'auto',
-    // marginRight: 'auto'
   },
   header:{
     backgroundColor:'#ffcd00',
