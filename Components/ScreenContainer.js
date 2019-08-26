@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import Home from './Home';
 import Scanner from './Scanner';
 import Services from './Services';
+import DocumentVerify from './DocumentVerify'; 
 
 const AppStackNavigator = createStackNavigator({
   HomeScreen: {
@@ -13,6 +14,9 @@ const AppStackNavigator = createStackNavigator({
   },
   ServiceScreen: {
     screen: Services
+  },
+  DocumentVerifyScreen: {
+    screen: DocumentVerify
   }
     
     

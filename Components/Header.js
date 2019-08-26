@@ -8,15 +8,6 @@ class Header extends Component{
             homePage : true
         };
     }
-
-    // componentDidMount(){
-    //     this.setState({
-    //         homePage: true
-    //     })
-    // }
-
-
-    //{this.props.homePage ? header 1 : header 2}
     
     render(){
         return(

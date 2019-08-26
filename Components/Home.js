@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, Image} from 'react-native'; 
-// import { createStackNavigator, createAppContainer } from 'react-navigation';
 import LogoTitle from './LogoTitle';
 
 class Home extends Component{

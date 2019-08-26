@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import LogoTitle from './LogoTitle';
 import { RNCamera } from 'react-native-camera';
 // import { withNavigationFocus } from 'react-navigation';
@@ -65,6 +65,9 @@ class Scanner extends Component {
     }
 }
 
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
     container:{
         flex: 1,
@@ -79,8 +82,8 @@ const styles = StyleSheet.create({
     },
     cameraStyle:{
         marginTop: 150,
-        width:'100%',
-        height: '50%'
+        width: width/2,
+        height: height/2
     }
 })
 
