@@ -47,9 +47,9 @@ $ git clone https://github.com/harsh253/Synd-Innovate.git
 ---
 
 ## Running the app
-- Once you have cloned the repository and installed Android Studio, connect your physical device via USB.
-- Navigate to the directory where the repo was cloned.
-- Now open command prompt with administrator rights and install all dependencies mentioned above
+- Once you have cloned the repository and installed Android Studio, connect your physical device via USB.Follow the instruction at https://facebook.github.io/react-native/docs/running-on-device to use your physical device as an emulator
+- Open command prompt with administrator rights and navigate to the directory where the repo was cloned.
+- Install all dependencies mentioned above
 ```shell
 cd AndroidApp
 npm install -g react-native-cli
@@ -60,6 +60,7 @@ npm install react-navigation --save
 ```
 - Once the dependencies have installed , you can run the app using
 ```shell
+cd AndroidApp
 react-native run-android
 ```
 - The app should be up and running
