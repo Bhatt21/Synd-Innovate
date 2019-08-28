@@ -29,10 +29,12 @@ class Services extends Component{
                 </View>
                 <FlatList data={[
                     {key: 'Advancing Of Loans'},
-                    {key: 'Cheque Payment'},
+                    // {key: 'Cheque Payment'},
+                    {key: 'Credit Card'},
+                    {key: 'Debit Card'},
                     {key: 'Foreign Currency Exchange'},
-                    {key: 'Open New Account'},
-                    {key: 'Remittance of Funds'},
+                    {key: 'Open New Savings Account'},
+                    {key: 'Overdraft'},
                 ]} renderItem={({item}) => 
                         <TouchableWithoutFeedback onPress={ () => this.LoadService(item.key)}>
                             <View style={styles.listContainer}>

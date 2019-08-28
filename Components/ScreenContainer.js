@@ -4,6 +4,7 @@ import Home from './Home';
 import Scanner from './Scanner';
 import Services from './Services';
 import DocumentVerify from './DocumentVerify'; 
+import Ticket from './Ticket'; 
 
 const AppStackNavigator = createStackNavigator({
   HomeScreen: {
@@ -16,11 +17,13 @@ const AppStackNavigator = createStackNavigator({
     screen: Services
   },
   DocumentVerifyScreen: {
-    screen: DocumentVerify
-  }
-    
-    
+    screen: DocumentVerify,
+  },
+  TicketScreen: {
+    screen: Ticket
+  }  
   });
+  
   
   const ScreenContainer = createAppContainer(AppStackNavigator);
 

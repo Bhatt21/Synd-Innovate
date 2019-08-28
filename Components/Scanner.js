@@ -53,12 +53,12 @@ class Scanner extends Component {
                 <Text style={styles.text}>
                     Scan the QR code to proceed further
                 </Text>
-                {this.state.focusedScreen? <RNCamera ref={ref => {
+                {this.state.focusedScreen? <View style={styles.cameraContainer}><RNCamera ref={ref => {
                         this.camera = ref;
                     }}
                     style={styles.cameraStyle}
                     onGoogleVisionBarcodesDetected={this.barcodeRecognized}>
-                </RNCamera> : <View></View>
+                </RNCamera></View> : <View></View>
                 }
             </View>
         )
@@ -80,8 +80,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         paddingTop: 20
     },
+    cameraContainer:{
+        marginTop: 100,
+    },
     cameraStyle:{
-        marginTop: 150,
         width: width/2,
         height: height/2
     }
