@@ -4,6 +4,7 @@ import LogoTitle from './LogoTitle';
 import { ScrollView } from 'react-native-gesture-handler';
 GLOBAL = require('./Global');
 
+const api = ''
 class DocumentVerify extends Component{
     constructor(props){
         super(props);
@@ -21,17 +22,34 @@ class DocumentVerify extends Component{
         
     };
 
-    loadTicket(){
+    loadTicket(service){
+        // var data = {
+        //     service: service
+        // };
+
+        // fetch(url,{
+        //     method: 'POST',
+        //     body: JSON.stringify(data),
+        //     headers: new Headers({
+        //         'Content-Type': 'application/json'
+        //     })
+        // }).then(res => res.json())
+        // .then(response => alert('Success:', response));
+
         GLOBAL.ticketBooked = true;
         this.setState({
             ticketIsBooked: true
         })
-        this.props.navigation.push('TicketScreen');
+        this.props.navigation.push('TicketScreen', {
+            service: service
+        });
     }
 
-    loadGeneratedTicket(){
+    loadGeneratedTicket(service){
         // alert('booked');
-        this.props.navigation.push('TicketScreen');
+        this.props.navigation.push('TicketScreen', {
+            service: service
+        });
         //This will be required to change when integrating with back end
     }
 
@@ -151,7 +169,7 @@ class DocumentVerify extends Component{
                         </View>
                             
                         <View style={styles.button}>
-                            {(this.state.ticketIsBooked || GLOBAL.ticketBooked) ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket()}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket()}/>}
+                            {(this.state.ticketIsBooked || GLOBAL.ticketBooked) ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket(service)}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket(service)}/>}
                             {/* <Button title="Book My Ticket" onPress={ () => this.loadTicket()}/> */}
                         </View>   
                     </ScrollView>
@@ -172,7 +190,7 @@ class DocumentVerify extends Component{
                         <Text style={styles.text}>4. Aadhar Card</Text>
                         <Text style={styles.text}>5. PAN Card</Text>
                         <View style={styles.button}>
-                        {GLOBAL.ticketBooked ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket()}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket()}/>}
+                        {GLOBAL.ticketBooked ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket(service)}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket(service)}/>}
                         {/* <Button title="Book My Ticket" onPress={ () => this.loadTicket()}/> */}
                         </View>  
                     </ScrollView>
@@ -223,7 +241,7 @@ class DocumentVerify extends Component{
                         <Text style={styles.text}>4. Form 16 (Only if PAN is not available)</Text>
                         <Text style={styles.text}>5. Two latest passport size photographs</Text>
                         <View style={styles.button}>
-                            {(this.state.ticketIsBooked || GLOBAL.ticketBooked) ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket()}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket()}/>}
+                            {(this.state.ticketIsBooked || GLOBAL.ticketBooked) ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket(service)}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket(service)}/>}
                         </View>  
                     </ScrollView>
                 </View>
@@ -283,7 +301,7 @@ class DocumentVerify extends Component{
                             </TouchableWithoutFeedback>}/>
                         </View>
                         <View style={styles.button}>
-                            {(this.state.ticketIsBooked || GLOBAL.ticketBooked) ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket()}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket()}/>}
+                            {(this.state.ticketIsBooked || GLOBAL.ticketBooked) ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket(service)}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket(service)}/>}
                         </View>
                     </ScrollView>
                 </View>
@@ -332,7 +350,7 @@ class DocumentVerify extends Component{
                         <Text style={styles.text}>3. PAN Card</Text>
                         <Text style={styles.text}>4. Two passport size photographs</Text>
                         <View style={styles.button}>
-                            {(this.state.ticketIsBooked || GLOBAL.ticketBooked) ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket()}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket()}/>}
+                            {(this.state.ticketIsBooked || GLOBAL.ticketBooked) ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket(service)}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket(service)}/>}
                         </View>
                     </ScrollView>
                 </View>
@@ -352,7 +370,7 @@ class DocumentVerify extends Component{
                         <Text style={styles.text}>4. Aadhar Card</Text>
                         <Text style={styles.text}>5. PAN Card</Text>
                         <View style={styles.button}>
-                            {(this.state.ticketIsBooked || GLOBAL.ticketBooked) ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket()}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket()}/>}
+                            {(this.state.ticketIsBooked || GLOBAL.ticketBooked) ? <Button title="View My Ticket" onPress={ () => this.loadGeneratedTicket(service)}/> : <Button title="Book My Ticket" onPress={ () => this.loadTicket(service)}/>}
                         </View>  
                     </ScrollView>
                 </View>

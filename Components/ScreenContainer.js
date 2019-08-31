@@ -7,12 +7,12 @@ import DocumentVerify from './DocumentVerify';
 import Ticket from './Ticket'; 
 
 const AppStackNavigator = createStackNavigator({
-  HomeScreen: {
-      screen: Home
-  },
-  ScannerScreen: {
-    screen: Scanner
-  },
+  // HomeScreen: {
+  //     screen: Home
+  // },
+  // ScannerScreen: {
+  //   screen: Scanner
+  // },
   ServiceScreen: {
     screen: Services
   },

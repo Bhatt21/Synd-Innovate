@@ -5,6 +5,17 @@ import { ScrollView } from 'react-native-gesture-handler';
 GLOBAL = require('./Global');
 
 class Ticket extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            agentName: '',
+            counterNumber: '',
+            ticketId: '',
+            reportingTime: '',
+            service: ''
+        }
+    }
+
     static navigationOptions = {
         headerTitle: <LogoTitle/>,
         headerStyle: {
@@ -18,6 +29,24 @@ class Ticket extends Component{
         this.props.navigation.navigate('HomeScreen');
     }
 
+    componentDidMount(){
+        var dataCollection = {
+            service: this.props.navigation.getParam('service'),
+            userId: '79'
+        }
+        // fetch('https://jsonplaceholder.typicode.com/users')
+        // .then(response => response.json())
+        // .then((responseJson)=>{
+        //     this.setState({
+        //         agentName: responseJson[0].name
+        //     })
+        // })
+        this.setState({
+            agentName: 'Luttapi Fucking Kumar',
+            service: dataCollection.service
+        })
+    }
+
     render(){
         return(
             <View style={styles.container}>
@@ -29,12 +58,17 @@ class Ticket extends Component{
                 <ScrollView style={{marginTop: 50}}>
                     <View style={styles.inline}>
                         <Text style={styles.title}>Name:</Text>
-                        <Text>Kanishka Maheshwari</Text>
+                        <Text>{this.state.agentName}</Text>
                     </View>
                     <View style={styles.inline}>
                         <Text style={styles.title}>Counter No:</Text>
                         <Text>T4</Text>
                     </View>
+                    <View style={styles.inline}>
+                        <Text style={styles.title}>Service:</Text>
+                        <Text>{this.state.service}</Text>
+                    </View>
+
                     <View style={styles.inline}>
                         <Text style={styles.title}>Ticket Id:</Text>
                         <Text>16112027</Text>
@@ -62,24 +96,11 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
         marginRight: 'auto',
         marginTop: 20,
-        // borderRightColor: 'red',
-        // borderRightWidth: 2,
-        // borderLeftColor: 'red',
-        // borderLeftWidth: 2,  
     },
     imageContainer: {
-        // flex: 1,
         marginTop: 30,
         width: width*0.5,
         height: height*0.3,
-        // borderTopColor: 'red',
-        // borderTopWidth: 2,
-        // borderRightColor: 'red',
-        // borderRightWidth: 2,
-        // borderBottomColor: 'red',
-        // borderBottomWidth: 2,
-        // borderLeftColor: 'red',
-        // borderLeftWidth: 2,
     },
     image:{
         width: '100%',
@@ -89,10 +110,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'flex-start',
         marginBottom: 20,
-        // marginLeft: 20,
         flexWrap: 'wrap',
-        // borderBottomColor: 'red',
-        // borderBottomWidth: 2,
     },
     title: {
         marginRight: 20,
