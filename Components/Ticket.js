@@ -41,6 +41,7 @@ class Ticket extends Component{
         //         agentName: responseJson[0].name
         //     })
         // })
+        //
         this.setState({
             agentName: 'Luttapi Fucking Kumar',
             service: dataCollection.service
