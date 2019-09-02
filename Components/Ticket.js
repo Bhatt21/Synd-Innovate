@@ -31,8 +31,8 @@ class Ticket extends Component{
 
     componentDidMount(){
         var dataCollection = {
-            service: this.props.navigation.getParam('service'),
-            userId: '79'
+            service_type: this.props.navigation.getParam('service'),
+            id: '312'
         }
         // fetch('https://jsonplaceholder.typicode.com/users')
         // .then(response => response.json())
@@ -42,10 +42,20 @@ class Ticket extends Component{
         //     })
         // })
         //
-        this.setState({
-            agentName: 'Luttapi Fucking Kumar',
-            service: dataCollection.service
-        })
+
+        fetch("http://0.0.0.0:8081/api/service",{
+            method: 'POST',
+            body: JSON.stringify(dataCollection),
+            headers: new Headers({ 
+                'Content-Type': 'application/json'
+            })
+        }).then(res => res.json())
+        .then(response => console.warn(response.ETA));
+
+        // this.setState({
+        //     agentName: 'Luttapi Fucking Kumar',
+        //     service: dataCollection.service
+        // })
     }
 
     render(){
@@ -59,16 +69,16 @@ class Ticket extends Component{
                 <ScrollView style={{marginTop: 50}}>
                     <View style={styles.inline}>
                         <Text style={styles.title}>Name:</Text>
-                        <Text>{this.state.agentName}</Text>
+                        <Text>Luttapi Fucking Kumar</Text>
                     </View>
                     <View style={styles.inline}>
                         <Text style={styles.title}>Counter No:</Text>
                         <Text>T4</Text>
                     </View>
-                    <View style={styles.inline}>
+                    {/* <View style={styles.inline}>
                         <Text style={styles.title}>Service:</Text>
                         <Text>{this.state.service}</Text>
-                    </View>
+                    </View> */}
 
                     <View style={styles.inline}>
                         <Text style={styles.title}>Ticket Id:</Text>

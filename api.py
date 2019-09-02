@@ -8,9 +8,9 @@ from datetime import datetime, timedelta
 ##
 mydb = mysql.connector.connect(
     host="localhost",
-    user="saket",
-    passwd="pass",
-    database = "User_info"
+    user="root",
+    passwd="Password@123",
+    database = "user_info"
 )
 
 class Response:
@@ -19,17 +19,17 @@ class Response:
         self.cursor = mydb.cursor()
 
     def get_counter_info(self,service_type,id):
-        query = 'select count(*) from Counter1'
+        query = 'select count(*) from counter1'
         self.cursor.execute(query)
         result = self.cursor.fetchall()
         counter1 = result[0][0]
-        query = 'select count(*) from Counter2'
+        query = 'select count(*) from counter2'
         self.cursor.execute(query)
         result = self.cursor.fetchall()
         counter2 = result[0][0]
 
         if counter2 >= counter1:
-            query = "Insert into Counter1 (id,time_in) values (%s,%s)"
+            query = "Insert into counter1 (id,time_in) values (%s,%s)"
             time_in = datetime.now()
             values = [id,time_in]
             ticket_id = uuid.uuid1()
@@ -44,7 +44,7 @@ class Response:
             mydb.commit()
             return dict
         else:
-            query = "Insert into Counter2 (id,time_in) values (%s,%s)"
+            query = "Insert into counter2 (id,time_in) values (%s,%s)"
             time_in = datetime.now()
             ticket_id = uuid.uuid1()
             values = [id,time_in]
