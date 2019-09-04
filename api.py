@@ -7,53 +7,105 @@ from datetime import datetime, timedelta
 
 ##
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="Password@123",
-    database = "user_info"
+	host="localhost",
+	user="root",
+	passwd="Password@123",
+	database = "user_info"
 )
 
 class Response:
-    def __init__(self):
-        self.mydb = mydb
-        self.cursor = mydb.cursor()
+	def __init__(self):
+		self.mydb = mydb
+		self.cursor = mydb.cursor()
+		
+	def check_user_exists(self,id):
+		query = "Select exists(select 1 from UserInfo where id = " + str(id) + ")"
+		self.cursor.execute(query)
+		result = self.cursor.fetchall()
+		if result[0][0] == 0:
+			return False
+		else:
+			return True
+			
+	def get_counter_info(self,id,service_type="n/a"):
+		if self.check_user_exists(id):
+			query = "Select * from UserInfo where id =" + str(id)
+			self.cursor.execute(query)
+			result = self.cursor.fetchall()
+			dict = {}
+			dict["ticketId"] = result[0][1]
+			dict["agentName"] = result[0][3]
+			dict["counterNo"] = result[0][2]
+			dict["service"] = result[0][4]
+			dict["reportingTime"] = result[0][5]
+			return dict
+			
+		else:	
+			query = 'select count(*) from counter1'
+			self.cursor.execute(query)
+			result = self.cursor.fetchall()
+			counter1 = result[0][0]
+			query = 'select count(*) from counter2'
+			self.cursor.execute(query)
+			result = self.cursor.fetchall()
+			counter2 = result[0][0]
 
-    def get_counter_info(self,service_type,id):
-        query = 'select count(*) from counter1'
-        self.cursor.execute(query)
-        result = self.cursor.fetchall()
-        counter1 = result[0][0]
-        query = 'select count(*) from counter2'
-        self.cursor.execute(query)
-        result = self.cursor.fetchall()
-        counter2 = result[0][0]
-
-        if counter2 >= counter1:
-            query = "Insert into counter1 (id,time_in) values (%s,%s)"
-            time_in = datetime.now()
-            values = [id,time_in]
-            ticket_id = uuid.uuid1()
-            self.cursor.execute(query,values)
-            dict = {}
-            dict["Name of person"] = "Hindustani Bhau"
-            dict["pic of person"] = "Nikal Lavde"
-            delta = 5 * counter2
-            dict["ETA"] = datetime.now() + timedelta(minutes = delta)
-            dict["Counter no"] = 1
-            dict["ticket_id"] = ticket_id
-            mydb.commit()
-            return dict
-        else:
-            query = "Insert into counter2 (id,time_in) values (%s,%s)"
-            time_in = datetime.now()
-            ticket_id = uuid.uuid1()
-            values = [id,time_in]
-            self.cursor.execute(query,values)
-            dict = {}
-            dict["Name of person"] = "Gucci Khan"
-            dict["pic of person"] = "Gucci Pucci"
-            delta = 5 * counter1
-            dict["ETA"] = datetime.now() + timedelta(minutes = delta)
-            dict["Counter no"] = 2
-            mydb.commit()
-            return dict
+			if counter2 >= counter1:
+				query = "Insert into counter1 (id,time_in) values (%s,%s)"
+				time_in = datetime.now()
+				values = [id,time_in]
+				ticket_id = uuid.uuid1()
+				ticket_id = str(ticket_id)
+				ticket_id = str(id) + ticket_id[0:-28]
+				self.cursor.execute(query,values)
+				dict = {}
+				dict["agentName"] = "Ishir Chatnani"
+				dict["pic of person"] = "jpeg"
+				delta = 5 * counter1
+				dict["reportingTime"] = datetime.now() + timedelta(minutes = delta)
+				dict["counterNo"] = 1
+				dict["ticketId"] = ticket_id
+				dict["service"] = service_type
+				sql = "Insert into UserInfo (id,ticket_id,counter_no,agent_name,service,reporting_time) Values \
+				(%s,%s,%s,%s,%s,%s)"
+				vals = [id,str(ticket_id),1,"Ishir Chatnani",service_type,dict["reportingTime"]]
+				self.cursor.execute(sql,vals)
+				mydb.commit()
+				return dict
+			else:
+				query = "Insert into counter2 (id,time_in) values (%s,%s)"
+				time_in = datetime.now()
+				ticket_id = uuid.uuid1()
+				ticket_id = str(ticket_id)
+				ticket_id = str(id) + ticket_id[0:-28]
+				values = [id,time_in]
+				self.cursor.execute(query,values)
+				dict = {}
+				dict["agentName"] = "Kanishka Maheshwari"
+				dict["pic of person"] = "Jpeg"
+				delta = 5 * counter2
+				dict["reportingTime"] = datetime.now() + timedelta(minutes = delta)
+				dict["counterNo"] = 2
+				dict["ticketId"] = ticket_id
+				dict["service"] = service_type
+				sql = "Insert into UserInfo (id,ticket_id,counter_no,agent_name,service,reporting_time) Values \
+				(%s,%s,%s,%s,%s,%s)"
+				vals = [id,str(ticket_id),2,"Kanishka Maheshwari",service_type,dict["reportingTime"]]
+				self.cursor.execute(sql,vals)
+				mydb.commit()
+				return dict
+				
+	def remove_user(self,id):
+		query = "Select * from UserInfo where id =" + str(id)
+		self.cursor.execute(query)
+		result = self.cursor.fetchall()
+		counter_no = result[0][2]
+		query = "delete from UserInfo where id = " + str(id)
+		self.cursor.execute(query)
+		query = "Delete from counter" + str(counter_no) + " where id =" + str(id)
+		self.cursor.execute(query)
+		mydb.commit()
+		return {}
+		
+		
+		

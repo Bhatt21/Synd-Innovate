@@ -4,6 +4,7 @@ import ScreenContainer from './Components/ScreenContainer'
 
 class App extends Component{
   render(){
+    console.disableYellowBox = true;
     return(
       <ScreenContainer/>
     )

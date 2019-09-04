@@ -4,12 +4,14 @@ import LogoTitle from './LogoTitle';
 import { ScrollView } from 'react-native-gesture-handler';
 GLOBAL = require('./Global');
 
+var userId = 977;
+
 class Ticket extends Component{
     constructor(props){
         super(props);
         this.state = {
             agentName: '',
-            counterNumber: '',
+            counterNo: '',
             ticketId: '',
             reportingTime: '',
             service: ''
@@ -26,22 +28,30 @@ class Ticket extends Component{
 
     deleteAppointment(){
         GLOBAL.ticketBooked = false;
-        this.props.navigation.navigate('HomeScreen');
+        
+
+        var dataCollection = {
+            id: userId
+        }
+
+        fetch("http://0.0.0.0:8081/api/service/delete",{
+            method: 'POST',
+            body: JSON.stringify(dataCollection),
+            headers: new Headers({ 
+                'Content-Type': 'application/json'
+            })
+        }).then(res => res.json())
+        .then(this.props.navigation.navigate('HomeScreen'))
+        .catch((error) => {
+            alert(error)
+        })
     }
 
     componentDidMount(){
         var dataCollection = {
             service_type: this.props.navigation.getParam('service'),
-            id: '312'
+            id: userId
         }
-        // fetch('https://jsonplaceholder.typicode.com/users')
-        // .then(response => response.json())
-        // .then((responseJson)=>{
-        //     this.setState({
-        //         agentName: responseJson[0].name
-        //     })
-        // })
-        //
 
         fetch("http://0.0.0.0:8081/api/service",{
             method: 'POST',
@@ -50,12 +60,13 @@ class Ticket extends Component{
                 'Content-Type': 'application/json'
             })
         }).then(res => res.json())
-        .then(response => console.warn(response.ETA));
-
-        // this.setState({
-        //     agentName: 'Luttapi Fucking Kumar',
-        //     service: dataCollection.service
-        // })
+        .then(response => this.setState({
+            agentName: response.agentName,
+            counterNo: response.counterNo,
+            ticketId: response.ticketId,
+            reportingTime: response.reportingTime,
+            service: response.service
+        }));
     }
 
     render(){
@@ -69,24 +80,24 @@ class Ticket extends Component{
                 <ScrollView style={{marginTop: 50}}>
                     <View style={styles.inline}>
                         <Text style={styles.title}>Name:</Text>
-                        <Text>Luttapi Fucking Kumar</Text>
+                        <Text>{this.state.agentName}</Text>
                     </View>
                     <View style={styles.inline}>
                         <Text style={styles.title}>Counter No:</Text>
-                        <Text>T4</Text>
+                        <Text>{this.state.counterNo}</Text>
                     </View>
-                    {/* <View style={styles.inline}>
+                    <View style={styles.inline}>
                         <Text style={styles.title}>Service:</Text>
                         <Text>{this.state.service}</Text>
-                    </View> */}
+                    </View>
 
                     <View style={styles.inline}>
                         <Text style={styles.title}>Ticket Id:</Text>
-                        <Text>16112027</Text>
+                        <Text>{this.state.ticketId}</Text>
                     </View>
                     <View style={styles.inline}>
                         <Text style={styles.title}>Reporting Time:</Text>
-                        <Text>12:23 AM</Text>
+                        <Text>{this.state.reportingTime}</Text>
                     </View>
                     <Button title="Delete My Appointment" style={{width: '100%', marginBottom:20}} onPress={ ()=> {this.deleteAppointment()}}/>
                 </ScrollView>
@@ -110,8 +121,8 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         marginTop: 30,
-        width: width*0.5,
-        height: height*0.3,
+        width: width*0.55,
+        height: '38%'
     },
     image:{
         width: '100%',

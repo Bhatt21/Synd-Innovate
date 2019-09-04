@@ -5,6 +5,7 @@ import Scanner from './Scanner';
 import Services from './Services';
 import DocumentVerify from './DocumentVerify'; 
 import Ticket from './Ticket'; 
+import Feedback from './Feedback'
 
 const AppStackNavigator = createStackNavigator({
   // HomeScreen: {
@@ -13,14 +14,17 @@ const AppStackNavigator = createStackNavigator({
   // ScannerScreen: {
   //   screen: Scanner
   // },
-  ServiceScreen: {
-    screen: Services
-  },
-  DocumentVerifyScreen: {
-    screen: DocumentVerify,
-  },
-  TicketScreen: {
-    screen: Ticket
+  // ServiceScreen: {
+  //   screen: Services
+  // },
+  // DocumentVerifyScreen: {
+  //   screen: DocumentVerify,
+  // },
+  // TicketScreen: {
+  //   screen: Ticket
+  // },
+  FeedbackScreen: {
+    screen: Feedback
   }  
   });
   
