@@ -51,8 +51,17 @@ class Response:
 			counter2 = result[0][0]
 
 			if counter2 >= counter1:
+				if counter1 > 0:
+					sql = "select time_in from counter1 order by date desc"
+					self.cursor.execute(sql)
+					result = self.cursor.fetchall()
+					time_in = result[0]
+					delta = 5 
+					time_in =  time_in + timedelta(minutes = delta) 
+				else:
+					time_in = time_in
 				query = "Insert into counter1 (id,time_in) values (%s,%s)"
-				time_in = datetime.now()
+				#time_in = datetime.now()
 				values = [id,time_in]
 				ticket_id = uuid.uuid1()
 				ticket_id = str(ticket_id)
@@ -62,7 +71,7 @@ class Response:
 				dict["agentName"] = "Ishir Chatnani"
 				dict["pic of person"] = "jpeg"
 				delta = 5 * counter1
-				dict["reportingTime"] = datetime.now() + timedelta(minutes = delta)
+				dict["reportingTime"] = time_in.strftime("%H:%M:%S")
 				dict["counterNo"] = 1
 				dict["ticketId"] = ticket_id
 				dict["service"] = service_type
@@ -72,9 +81,18 @@ class Response:
 				self.cursor.execute(sql,vals)
 				mydb.commit()
 				return dict
-			else:
+			else:   
+				if counter2 > 0:
+					sql = "select time_in from counter2 order by date desc"
+					self.cursor.execute(sql)
+					result = self.cursor.fetchall()
+					time_in = result[0]
+					delta = 5 
+					time_in =  time_in + timedelta(minutes = delta) 
+				else:
+					time_in = time_in
 				query = "Insert into counter2 (id,time_in) values (%s,%s)"
-				time_in = datetime.now()
+				#time_in = datetime.now()
 				ticket_id = uuid.uuid1()
 				ticket_id = str(ticket_id)
 				ticket_id = str(id) + ticket_id[0:-28]
@@ -84,7 +102,7 @@ class Response:
 				dict["agentName"] = "Kanishka Maheshwari"
 				dict["pic of person"] = "Jpeg"
 				delta = 5 * counter2
-				dict["reportingTime"] = datetime.now() + timedelta(minutes = delta)
+				dict["reportingTime"] = time_in.strftime("%H:%M:%S")
 				dict["counterNo"] = 2
 				dict["ticketId"] = ticket_id
 				dict["service"] = service_type
