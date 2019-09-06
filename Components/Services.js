@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {Text, View, FlatList, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Text, View, FlatList, StyleSheet, TouchableNativeFeedback, TouchableWithoutFeedback} from 'react-native';
 import LogoTitle from './LogoTitle';
+import {Icon} from 'react-native-vector-icons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 class Services extends Component{
@@ -23,7 +25,7 @@ class Services extends Component{
         return(
             <View style={styles.container}>
                 <View style={styles.headerContainer}>
-                    <Text style={{fontSize: 20}}>
+                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                         Please Select Your Service
                     </Text>
                 </View>
@@ -36,11 +38,15 @@ class Services extends Component{
                     {key: 'Open New Savings Account'},
                     {key: 'Overdraft'},
                 ]} renderItem={({item}) => 
-                        <TouchableWithoutFeedback onPress={ () => this.LoadService(item.key)}>
+                        <TouchableNativeFeedback useForeground={true} onPress={ () => this.LoadService(item.key)}>
                             <View style={styles.listContainer}>
-                                <Text style={styles.text}>{item.key}</Text>
+                                <View style={styles.listModifier}>
+                                    <Text style={styles.text}>{item.key}</Text>
+                                {/* <Text>FontAwesome Icons</Text> */}
+                                    <FontAwesome style={{alignSelf: 'flex-end', color: 'grey', paddingBottom:15}} name='angle-right' size={21} />
+                                </View>
                             </View>
-                        </TouchableWithoutFeedback>}/>
+                        </TouchableNativeFeedback>}/>
             </View>
         )
     }
@@ -51,7 +57,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems : 'center',
-        marginBottom: 10,
+        marginBottom: 20,
         marginTop: 5  
     },
     listContainer:{
@@ -61,13 +67,23 @@ const styles = StyleSheet.create({
         alignItems : 'flex-start',
         height:'100%',
         borderBottomColor: 'grey',
-        borderBottomWidth: 1, 
+        borderBottomWidth: 0.8, 
+        // marginLeft: 5
+        // borderRightWidth: 1,
+        // borderRightColor: 'red',
+        width: '100%',
+    },
+    listModifier:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        // borderRightWidth: 1,
+        width: '98%'
     },
     text:{
-        fontSize: 18,
-        paddingTop: 25, 
+        // fontSize: 18,
+        paddingTop: 14,
+        paddingBottom: 14, 
         paddingLeft: 5,
-        
     }
 
 })

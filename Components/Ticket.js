@@ -1,10 +1,11 @@
 import React,  {Component} from 'react';
-import {Text, StyleSheet, View, Image, Dimensions, Button} from 'react-native';
+import {Text, StyleSheet, View, Image, Dimensions, Button, Modal, TouchableHighlight} from 'react-native';
 import LogoTitle from './LogoTitle';
 import { ScrollView } from 'react-native-gesture-handler';
+// import console = require('console');
 GLOBAL = require('./Global');
 
-var userId = 977;
+var userId = 1;
 
 class Ticket extends Component{
     constructor(props){
@@ -14,7 +15,8 @@ class Ticket extends Component{
             counterNo: '',
             ticketId: '',
             reportingTime: '',
-            service: ''
+            service: '',
+            modalVisible: false
         }
     }
 
@@ -26,15 +28,17 @@ class Ticket extends Component{
         headerRight: <View/>
     };
 
-    deleteAppointment(){
-        GLOBAL.ticketBooked = false;
-        
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    }
 
+    deleteAppointment(visible){
+        GLOBAL.ticketBooked = false;
         var dataCollection = {
             id: userId
         }
 
-        fetch("http://0.0.0.0:8081/api/service/delete",{
+        fetch("http://192.168.137.1:8080/api/service/delete",{
             method: 'POST',
             body: JSON.stringify(dataCollection),
             headers: new Headers({ 
@@ -45,6 +49,7 @@ class Ticket extends Component{
         .catch((error) => {
             alert(error)
         })
+        this.setState({modalVisible: visible});
     }
 
     componentDidMount(){
@@ -52,8 +57,7 @@ class Ticket extends Component{
             service_type: this.props.navigation.getParam('service'),
             id: userId
         }
-
-        fetch("http://0.0.0.0:8081/api/service",{
+        fetch("http://192.168.137.1:8080/api/service",{
             method: 'POST',
             body: JSON.stringify(dataCollection),
             headers: new Headers({ 
@@ -99,8 +103,45 @@ class Ticket extends Component{
                         <Text style={styles.title}>Reporting Time:</Text>
                         <Text>{this.state.reportingTime}</Text>
                     </View>
-                    <Button title="Delete My Appointment" style={{width: '100%', marginBottom:20}} onPress={ ()=> {this.deleteAppointment()}}/>
+                    <View style={{marginBottom:20}}>
+                        <Button title="Delete My Appointment" style={{width: '100%'}} onPress={ ()=> {this.setModalVisible(true)}}/>
+                    </View>
                 </ScrollView>
+                <View>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {
+                            this.setModalVisible(!this.state.modalVisible)
+                        }}>
+                        <View style={styles.modalContainer}>
+                            <View style={styles.modalContent}>
+                                <Text style={{fontWeight: 'bold', fontSize: 16, paddingLeft:20, paddingRight:20}}>Are you sure you want to delete your appointment ?</Text>
+
+                                <View style={styles.modalButtons}>
+                                    {/* <View> */}
+                                        <Button title="Yes" onPress={() => this.deleteAppointment(!this.state.modalVisible)}/>
+                                        <Button title="No" onPress={()=>{this.setModalVisible(!this.state.modalVisible)}}/>
+                                    {/* </View> */}
+                                </View>
+                            {/* <TouchableHighlight
+                                onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                                }}>
+                                <Text>Hide Modal</Text>
+                            </TouchableHighlight> */}
+                            </View>
+                        </View>
+                    </Modal>
+
+                    {/* <TouchableHighlight
+                        onPress={() => {
+                            this.setModalVisible(true);
+                        }}>
+                        <Text>Show Modal</Text>
+                    </TouchableHighlight> */}
+                </View>
             </View>
         )
     }
@@ -108,6 +149,7 @@ class Ticket extends Component{
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+
 
 const styles = StyleSheet.create({
     container: {
@@ -121,12 +163,16 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         marginTop: 30,
-        width: width*0.55,
-        height: '38%'
+        width: 160,
+        height: 160,
+        borderRadius: 320,
+        borderWidth: 2,
+        borderColor: '#ffcd00'
     },
     image:{
         width: '100%',
         height: '100%',
+        borderRadius: 320,
     },
     inline:{
         flexDirection: 'row',
@@ -137,6 +183,28 @@ const styles = StyleSheet.create({
     title: {
         marginRight: 20,
         fontWeight: 'bold',
+    },
+    modalContainer:{
+        height: height*0.2,
+        backgroundColor: 'white',
+        borderColor: 'grey',
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        marginTop: height*0.35,
+        width: '80%',
+        marginLeft: 'auto',
+        marginRight: 'auto'
+    },
+    modalContent:{
+        flexDirection: 'column',
+        justifyContent: 'center'
+    },
+    modalButtons:{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginTop: 30
     }
 })
 export default Ticket;

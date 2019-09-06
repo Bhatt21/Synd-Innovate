@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#fffae0'
+        // backgroundColor: '#fffae0'
     },
     text:{
         fontSize: 20,

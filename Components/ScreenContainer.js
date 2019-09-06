@@ -8,21 +8,21 @@ import Ticket from './Ticket';
 import Feedback from './Feedback'
 
 const AppStackNavigator = createStackNavigator({
-  // HomeScreen: {
-  //     screen: Home
-  // },
-  // ScannerScreen: {
-  //   screen: Scanner
-  // },
-  // ServiceScreen: {
-  //   screen: Services
-  // },
-  // DocumentVerifyScreen: {
-  //   screen: DocumentVerify,
-  // },
-  // TicketScreen: {
-  //   screen: Ticket
-  // },
+  HomeScreen: {
+      screen: Home
+  },
+  ScannerScreen: {
+    screen: Scanner
+  },
+  ServiceScreen: {
+    screen: Services
+  },
+  DocumentVerifyScreen: {
+    screen: DocumentVerify,
+  },
+  TicketScreen: {
+    screen: Ticket
+  },
   FeedbackScreen: {
     screen: Feedback
   }  
