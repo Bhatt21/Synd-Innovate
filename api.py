@@ -51,6 +51,7 @@ class Response:
 			counter2 = result[0][0]
 
 			if counter2 >= counter1:
+				time_in = datetime.now()
 				if counter1 > 0:
 					sql = "select time_in from counter1 order by date desc"
 					self.cursor.execute(sql)
@@ -82,6 +83,7 @@ class Response:
 				mydb.commit()
 				return dict
 			else:   
+				time_in = datetime.now()
 				if counter2 > 0:
 					sql = "select time_in from counter2 order by date desc"
 					self.cursor.execute(sql)
