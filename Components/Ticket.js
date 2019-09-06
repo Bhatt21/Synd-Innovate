@@ -5,7 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 // import console = require('console');
 GLOBAL = require('./Global');
 
-var userId = 1;
+var userId = 230;
 
 class Ticket extends Component{
     constructor(props){
@@ -38,7 +38,7 @@ class Ticket extends Component{
             id: userId
         }
 
-        fetch("http://192.168.137.1:8080/api/service/delete",{
+        fetch("http://0.0.0.0:8081/api/service/delete",{
             method: 'POST',
             body: JSON.stringify(dataCollection),
             headers: new Headers({ 
@@ -57,7 +57,7 @@ class Ticket extends Component{
             service_type: this.props.navigation.getParam('service'),
             id: userId
         }
-        fetch("http://192.168.137.1:8080/api/service",{
+        fetch("http://0.0.0.0:8081/api/service",{
             method: 'POST',
             body: JSON.stringify(dataCollection),
             headers: new Headers({ 
