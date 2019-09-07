@@ -13,6 +13,12 @@
 - react-native-gesture-handler
 - react-native-permissions
 - react-navigation
+- Python 2.6 or greater
+- Python Libraries:
+    -Flask
+    -Mysql-connector
+- Mysql 5.8 or higher
+
 
 ## Table of Contents
 - [Installation](#installation)
@@ -45,6 +51,14 @@ npm -v
 $ git clone https://github.com/harsh253/Synd-Innovate.git
 ```
 ---
+## Steps to setup the backend server
+-Install all the dependencies
+-Make 3 tables namely counter1,counter2 and user_info
+-Schema for counter1, counter2 is
+
+Field   Type      Null  Key      
+id      int        No   Primary    
+time_in datetime   Yes
 
 ## Running the app
 - Once you have cloned the repository and installed Android Studio, connect your physical device via USB.Follow the instruction at https://facebook.github.io/react-native/docs/running-on-device to use your physical device as an emulator
