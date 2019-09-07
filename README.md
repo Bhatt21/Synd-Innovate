@@ -54,7 +54,7 @@ $ git clone https://github.com/harsh253/Synd-Innovate.git
 ## Steps to setup the backend server
 - Install all the dependencies
 - run the sql script in your mysql as source path/sql_script.sql
-- change the user and password for mysql in the api.py file in line # xx
+- change the user and password for mysql in the api.py file in line # 11 and #12
 - run the flask app by python flask_app.py
 
 ## Running the app
