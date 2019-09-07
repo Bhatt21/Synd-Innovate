@@ -53,9 +53,15 @@ $ git clone https://github.com/harsh253/Synd-Innovate.git
 ---
 ## Steps to setup the backend server
 - Install all the dependencies
-- run the sql script in your mysql as source path/sql_script.sql
+- run the sql script in your mysql as 
+```shell
+    source path/sql_script.sql
+```
 - change the user and password for mysql in the api.py file in line # 11 and #12
-- run the flask app by python flask_app.py
+- run the flask app by
+```shell
+python flask_app.py
+```
 
 ## Running the app
 - Once you have cloned the repository and installed Android Studio, connect your physical device via USB.Follow the instruction at https://facebook.github.io/react-native/docs/running-on-device to use your physical device as an emulator
