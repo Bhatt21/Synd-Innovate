@@ -83,6 +83,7 @@ npm install react-native-camera --save
 npm install react-native-gesture-handler --save
 npm install react-native-permissions --save
 npm install react-navigation --save
+npm install
 ```
 - Once the dependencies have installed , you can run the app using
 ```shell
