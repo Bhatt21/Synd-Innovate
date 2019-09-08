@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native'; 
+import {StyleSheet, Text, View, Button, Image} from 'react-native'; 
+import LogoTitle from './LogoTitle';
 
 class Home extends Component{
+    static navigationOptions = {
+        headerTitle: <LogoTitle/>,
+      };
     render(){
         return(
         <View style={styles.container}>
@@ -11,32 +15,31 @@ class Home extends Component{
                 </Text>
             
             <View style={styles.buttonContainer}>
-                <Button title="Generate a queue ticket"/> 
+                <Button title="Generate a queue ticket" onPress={() => this.props.navigation.push('ScannerScreen')}/> 
             </View>
         </View>
         )
     }
 }
 
-/* To load header 2 , perform an onClick and when clicked 
-    set props homePge = false like <Header homePage = {false}>
-    and default state will always be true
-*/
+
 
 const styles= StyleSheet.create({
     container:{
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        height: '100%'
+        height: '100%',
+        // backgroundColor: '#fffae0'
     },
     text:{
         fontSize: 30
     },
     buttonContainer:{
-        height : '70%',
+        height : '90%',
         justifyContent: 'center'
-    }
+    },
+    
 
 })
 
